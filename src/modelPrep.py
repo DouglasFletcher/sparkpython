@@ -49,9 +49,9 @@ def importData(spark, FILEIN):
 	)
 	# create training & test
 	training = sparkDf.filter(sparkDf.rowno <= 125000)
-	testing = sparkDf.filter(sparkDf.rowno > 125000)
+	#testing = sparkDf.filter(sparkDf.rowno > 125000)
 	# both datasets
-	output = [training,testing]
+	output = [training]
 	# output
 	return output
 	
@@ -63,7 +63,6 @@ def createTrans(sparkDF):
 	# douglas fletcher
 	# purpose: create data 
 	# transformations 
-	# configuration
 	# input: 
 	# 	sparkDF type sparkDF
 	# output: 
@@ -239,40 +238,34 @@ def createTrans(sparkDF):
 
 
 
-
 @timerFn
-def createRandomForest(spark, sparkDF, NUMTREES, MAXDEPTH):
+def createRandomForest(sparkDF, NUMTREES, NUMCLASSES, MAXDEPTH):
 	# ===========================
 	# douglas fletcher
 	# purpose: create random 
 	# forest model
-	# configuration
 	# input: 
 	# 	spark type sparkSession
 	# 	sparkDF type sparkDF
 	# output: 
 	# ===========================
-	#sparkDF.map()
-	# create labelled point dataset
-	data = [
-		LabeledPoint(0.0, [0.0]),
-		LabeledPoint(0.0, [1.0]),
-		LabeledPoint(1.0, [2.0]),
-		LabeledPoint(1.0, [3.0])
-	]
-	model = RandomForest.trainClassifier(
-		spark.parallelize(data)
-		, numTrees = NUMTREES
-		, maxDepth = MAXDEPTH
-		, seed=42
+	# create labelled point rdd
+	data = sparkDF.rdd.map(
+		lambda row: LabeledPoint(row["SeriousDlqin2yrs"], list(row[2:]))
 	)
-
-
-
-
-
-
-
+	# create random forest model
+	model = RandomForest.trainClassifier(
+		  data
+		, numTrees = NUMTREES
+		, numClasses = NUMCLASSES
+		, maxDepth = MAXDEPTH
+		, impurity='gini'
+		, featureSubsetStrategy="auto"
+		, categoricalFeaturesInfo={}
+		, seed=42
+		#, maxBins=32
+	)
+	print(model.numTrees())
 
 
 

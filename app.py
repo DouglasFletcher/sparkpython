@@ -6,7 +6,7 @@
 PATH = "C:/Users/douglas.fletcher/Documents/projects/"
 PROJECTLOC = PATH + "/creditscore_spark/creditscoring_py"
 PYLIBLOCAL =  PROJECTLOC + "/src/"
-RAWDATA = PATH + "/creditscore_spark/01_data/cstraining_kaggle.csv"
+RAWDATA = PATH + "/creditscore_spark/01_data/cstraining_kaggle_test.csv"
 
 
 # ============
@@ -36,5 +36,6 @@ if __name__ == "__main__":
 
 	# create model
 	NUMTREES = 2
+	NUMCLASSES = 2
 	MAXDEPTH = 3
-	createRandomForest(spark, prepData, NUMTREES, MAXDEPTH)
+	createRandomForest(prepData, NUMTREES, NUMCLASSES, MAXDEPTH)
