@@ -38,4 +38,4 @@ if __name__ == "__main__":
 	NUMTREES = 2
 	NUMCLASSES = 2
 	MAXDEPTH = 3
-	createRandomForest(prepData, NUMTREES, NUMCLASSES, MAXDEPTH)
+	#createRandomForest(prepData, NUMTREES, NUMCLASSES, MAXDEPTH)
