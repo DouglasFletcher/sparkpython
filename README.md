@@ -1,10 +1,5 @@
 # pyspark model implementation
-The purpose of this python repository is to build a template to move a model developed in python to pyspark. The business developement oppotunity is also targeted to Risk & Fraud analytics 
-Group (But could easily be used in any other model or data processing application).
-The case example uses a kaggle repository https://www.kaggle.com/c/GiveMeSomeCredit. All data for the models are stored on this site. Basically credit worthiness is predicted in this 
-example (classic Risk & Fraud Analytics case study). This can be used as a template to setup spark, see how the API can be used in comparison to python. The case sample 
-has been developed in a way that most users of python can access this example relatively easy and use it as a reference, for streamlining the transition from python to pyspark in a project 
-work environment.  
+The purpose of this repository is to develop a model example with python and Spark API. The case example uses a kaggle repository https://www.kaggle.com/c/GiveMeSomeCredit. All data for the models are stored on this site (just change variable names without "-" I was lazy ... e.g. "NumberOfTime60-89DaysPastDueNotWorse"-> "NumberOfTime6089DaysPastDueNotWorse"). Basically credit worthiness is predicted in this example. This can be used as a template to setup spark, see how the API can be used for python. The case sample has been developed in a way that most users of python can access this example relatively easy and use it as a reference.
 
 Dependencies: 
 Spark 2.1.0 http://spark.apache.org/downloads.html
